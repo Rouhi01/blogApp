@@ -1,3 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.views import View
+from .models import Post
 
-# Create your views here.
+
+class HomeView(View):
+    template_name = 'home/home.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+class PostDetailView(View):
+    template_name = 'home/post_detail.html'
+
+    def get(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        context = {
+            'post':post
+        }
+        return render(request, self.template_name, context)
+
