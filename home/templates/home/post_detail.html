@@ -24,13 +24,12 @@
                     <center>
                         <div class="typo">
                             <h1 class="title blog-title">
-                                A blog title and other stuffs will add here, also we can
-                                incluse.
+                                {{ post.title }}
                             </h1>
                             <div class="timeline">
                                 <div class="track">
                                     <i class="uil uil-clock"></i>
-                                    <p class="time">June 10, 2022</p>
+                                    <p class="time">{{ post.created_at|date:'F d, Y' }}</p>
                                 </div>
                                 <div class="track">
                                     <i class="uil uil-users-alt"></i>
@@ -54,58 +53,11 @@
                             <!-- blog post -->
                             <div class="blog-post">
                                 <div class="post-img blog-img">
-                                    <img src="../images/post.png" alt="">
+                                    <img src="{{ post.image.url }}" alt="">
                                 </div>
                                 <div class="blog-post-content">
                                     <p>
-                                        If you have invested time, energy and money on creating a
-                                        website for your business, you know very well that
-                                        nowadays virtually every company must have an online
-                                        presence. However, having a great website in place is not
-                                        a final goal that you can afford to tick and archive. A
-                                        website is never something static, and this is why you
-                                        should always keep up with change and continuously improve
-                                        it. It would help if you thought of your website as a
-                                        salesman who represents your company every day and keeps
-                                        an eye on what is happening in the field. Competitors will
-                                        adopt new strategies, as the needs of your existing and
-                                        potential customers evolve. Therefore, there are many good
-                                        reasons why you should invest periodically in re-adapting
-                                        your website’s content and functionality.
-                                    </p>
-                                    <br><br>
-                                    <p>
-                                        If you have invested time, energy and money on creating a
-                                        website for your business, you know very well that
-                                        nowadays virtually every company must have an online
-                                        presence. However, having a great website in place is not
-                                        a final goal that you can afford to tick and archive. A
-                                        website is never something static, and this is why you
-                                        should always keep up with change and continuously improve
-                                        it. It would help if you thought of your website as a
-                                        salesman who represents your company every day and keeps
-                                        an eye on what is happening in the field. Competitors will
-                                        adopt new strategies, as the needs of your existing and
-                                        potential customers evolve. Therefore, there are many good
-                                        reasons why you should invest periodically in re-adapting
-                                        your website’s content and functionality.
-                                    </p>
-                                    <br><br>
-                                    <p>
-                                        If you have invested time, energy and money on creating a
-                                        website for your business, you know very well that
-                                        nowadays virtually every company must have an online
-                                        presence. However, having a great website in place is not
-                                        a final goal that you can afford to tick and archive. A
-                                        website is never something static, and this is why you
-                                        should always keep up with change and continuously improve
-                                        it. It would help if you thought of your website as a
-                                        salesman who represents your company every day and keeps
-                                        an eye on what is happening in the field. Competitors will
-                                        adopt new strategies, as the needs of your existing and
-                                        potential customers evolve. Therefore, there are many good
-                                        reasons why you should invest periodically in re-adapting
-                                        your website’s content and functionality.
+                                        {{ post.content }}
                                     </p>
                                     <div class="blog-tags">
                                         <div class="tag">Tag content</div>
@@ -151,7 +103,7 @@
                                     <div class="user-comment">
                                         <div class="author">
                                             <div class="profile-pic">
-                                                <img src="../images/author.svg" alt="">
+                                                <img src="{% static 'img/author.svg' %}" alt="">
                                             </div>
                                             <div class="details">
                                                 <p>Author name</p>
@@ -202,7 +154,7 @@
                                             <div class="public-reply">
                                                 <div class="author">
                                                     <div class="profile-pic">
-                                                        <img src="../images/author.svg" alt="">
+                                                        <img src="{% static 'img/author.svg' %}" alt="">
                                                     </div>
                                                     <div class="details">
                                                         <p>Author name</p>
@@ -224,7 +176,7 @@
                                     <div class="user-comment">
                                         <div class="author">
                                             <div class="profile-pic">
-                                                <img src="../images/author.svg" alt="">
+                                                <img src="{% static 'img/author.svg' %}" alt="">
                                             </div>
                                             <div class="details">
                                                 <p>Author name</p>
@@ -277,7 +229,7 @@
                                     <div class="user-comment">
                                         <div class="author">
                                             <div class="profile-pic">
-                                                <img src="../images/author.svg" alt="">
+                                                <img src="{% static 'img/author.svg' %}" alt="">
                                             </div>
                                             <div class="details">
                                                 <p>Author name</p>
@@ -358,7 +310,7 @@
                         <h2 class="title2">Most recent</h2>
                         <div class="recent-post">
                             <div class="rounded-img">
-                                <img src="../images/post.png" alt="">
+                                <img src="{% static 'home/img/post.png' %}" alt="">
                             </div>
                             <div class="recent-content">
                                 <h3>
@@ -371,7 +323,7 @@
                         </div>
                         <div class="recent-post">
                             <div class="rounded-img">
-                                <img src="../images/post.png" alt="">
+                                <img src="{% static 'home/img/post.png' %}" alt="">
                             </div>
                             <div class="recent-content">
                                 <h3>
@@ -384,7 +336,7 @@
                         </div>
                         <div class="recent-post">
                             <div class="rounded-img">
-                                <img src="../images/post.png" alt="">
+                                <img src="{% static 'home/img/post.png' %}" alt="">
                             </div>
                             <div class="recent-content">
                                 <h3>
@@ -403,7 +355,7 @@
                         <a href="#">
                             <div class="card">
                                 <div class="post-img">
-                                    <img src="../images/post.png" alt="">
+                                    <img src="{% static 'home/img/post.png' %}" alt="">
                                     <div class="tag">Tag name</div>
                                 </div>
                                 <div class="card-content">
@@ -439,7 +391,7 @@
                                     </h3>
                                     <div class="author">
                                         <div class="profile-pic">
-                                            <img src="../images/author.svg" alt="">
+                                            <img src="{% static 'img/author.svg' %}" alt="">
                                         </div>
                                         <div class="details">
                                             <p>Author name</p>

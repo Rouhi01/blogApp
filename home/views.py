@@ -7,6 +7,10 @@ class HomeView(View):
     template_name = 'home/home.html'
 
     def get(self, request):
+        posts = Post.objects.all()
+        context = {
+            'posts':posts
+        }
         return render(request, self.template_name)
 
 
