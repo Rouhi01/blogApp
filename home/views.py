@@ -19,6 +19,14 @@ class PostDetailView(View):
 
     def get(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
+
+        # Calculate the view count
+        if post.view_count is None:
+            post.view_count = 1
+        else:
+            post.view_count += 1
+        post.save()
+
         context = {
             'post':post
         }
@@ -31,7 +39,6 @@ class TagView(View):
     def get(self, request, slug):
         tag = get_object_or_404(Tag, slug=slug)
         posts = Post.objects.filter(tag=tag)
-        print(tag.name)
         context = {
             'posts':posts,
             'tag':tag
