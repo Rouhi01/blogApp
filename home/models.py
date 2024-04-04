@@ -20,6 +20,9 @@ class Post(models.Model):
         self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
+    def count_comments(self):
+        return Comment.objects.all().count()
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True)

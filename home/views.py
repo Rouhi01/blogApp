@@ -25,8 +25,6 @@ class PostDetailView(View):
 
         # Get all comment of this post
         comments = Comment.objects.filter(post=post, is_reply=False)
-        for comment in comments:
-            print(comment.replies.all())
 
 
         # Calculate the view count
