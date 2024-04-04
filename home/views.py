@@ -24,7 +24,9 @@ class PostDetailView(View):
         form = CommentForm()
 
         # Get all comment of this post
-        comments = Comment.objects.filter(post=post)
+        comments = Comment.objects.filter(post=post, is_reply=False)
+        for comment in comments:
+            print(comment.replies.all())
 
 
         # Calculate the view count
@@ -45,12 +47,26 @@ class PostDetailView(View):
         post = get_object_or_404(Post, slug=slug)
         form = CommentForm(request.POST)
         if form.is_valid():
-            new_form = form.save(commit=False)
-            new_form.post = post
-            if request.user.is_authenticated:
-                new_form.author = request.user
-            new_form.save()
-            return redirect(reverse('home:post_detail', kwargs={'slug':slug}))
+            parent = request.POST.get('parent')
+            if parent:
+                parent = Comment.objects.get(id=parent)
+                if parent:
+                    comment_reply = form.save(commit=False)
+                    comment_reply.parent = parent
+                    comment_reply.post = post
+                    comment_reply.is_reply = True
+                    if request.user.is_authenticated:
+                        comment_reply.author = request.user
+                    comment_reply.save()
+                    return redirect(reverse('home:post_detail', kwargs={'slug':slug}))
+
+            else:
+                comment = form.save(commit=False)
+                comment.post = post
+                if request.user.is_authenticated:
+                    comment.author = request.user
+                comment.save()
+                return redirect(reverse('home:post_detail', kwargs={'slug':slug}))
         context = {
             'form':form,
             'post':post

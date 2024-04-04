@@ -125,44 +125,40 @@
                                                             are marked<span>*</span>
                                                         </p>
                                                         <form method="POST">
-                                                        <textarea name="content" cols="40" rows="10"
-                                                                  placeholder="Type your comment...." required=""
-                                                                  id="id_content">      </textarea>
+                                                            {% csrf_token %}
+                                                            {{ form.content }}
                                                             <div class="grid-3">
-                                                                <input type="text" name="name" maxlength="200"
-                                                                       placeholder="Name" required="" id="id_name">
-                                                                <input type="text" name="email" maxlength="200"
-                                                                       placeholder="Email" required="" id="id_email">
-                                                                <input type="text" name="website" maxlength="200"
-                                                                       placeholder="Website" id="id_website">
+                                                                <input type="hidden" name="parent" value="{{ comment.id }}">
+                                                                {{ form.name }}
+                                                                {{ form.email }}
+                                                                {{ form.website }}
                                                             </div>
 
-                                                            <button class="btn btn-primary rounded">
+                                                            <button class="btn btn-primary rounded" type="submit">
                                                                 Post Reply
                                                             </button>
                                                         </form>
                                                     </div>
 
                                                 </div>
-
-                                                <div class="public-reply">
+                                                {% for reply in comment.replies.all %}
+                                                    <div class="public-reply">
                                                     <div class="author">
                                                         <div class="profile-pic">
                                                             <img src="{% static 'img/author.svg' %}" alt="">
                                                         </div>
                                                         <div class="details">
-                                                            <p>Author name</p>
-                                                            <small>June 20, 2022</small>
+                                                            <p>{{ reply.name }}</p>
+                                                            <small>{{ reply.created_at|date }}</small>
                                                         </div>
                                                     </div>
                                                     <div class="comment">
                                                         <p>
-                                                            Lorem ipsum dolor sit amet consectetur adipisicing
-                                                            elit. Tempora magnam minima harum, dignissimos
+                                                            {{ reply.content }}
                                                         </p>
                                                     </div>
                                                 </div>
-
+                                                {% endfor %}
 
                                             </div>
                                         </div>
