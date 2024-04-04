@@ -23,6 +23,10 @@ class PostDetailView(View):
         post = get_object_or_404(Post, slug=slug)
         form = CommentForm()
 
+        # Get all comment of this post
+        comments = Comment.objects.filter(post=post)
+
+
         # Calculate the view count
         if post.view_count is None:
             post.view_count = 1
@@ -32,7 +36,8 @@ class PostDetailView(View):
 
         context = {
             'post':post,
-            'form':form
+            'form':form,
+            'comments':comments
         }
         return render(request, self.template_name, context)
 
