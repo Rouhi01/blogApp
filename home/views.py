@@ -31,6 +31,7 @@ class TagView(View):
     def get(self, request, slug):
         tag = get_object_or_404(Tag, slug=slug)
         posts = Post.objects.filter(tag=tag)
+        print(tag.name)
         context = {
             'posts':posts,
             'tag':tag
