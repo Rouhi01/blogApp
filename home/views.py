@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import View
-from .models import Post
+from .models import Post, Tag
 
 
 class HomeView(View):
@@ -11,7 +11,7 @@ class HomeView(View):
         context = {
             'posts':posts
         }
-        return render(request, self.template_name)
+        return render(request, self.template_name, context)
 
 
 class PostDetailView(View):
@@ -21,6 +21,19 @@ class PostDetailView(View):
         post = get_object_or_404(Post, slug=slug)
         context = {
             'post':post
+        }
+        return render(request, self.template_name, context)
+
+
+class TagView(View):
+    template_name = 'home/tag.html'
+
+    def get(self, request, slug):
+        tag = get_object_or_404(Tag, slug=slug)
+        posts = Post.objects.filter(tag=tag)
+        context = {
+            'posts':posts,
+            'tag':tag
         }
         return render(request, self.template_name, context)
 

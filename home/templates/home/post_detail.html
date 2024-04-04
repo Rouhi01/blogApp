@@ -60,18 +60,11 @@
                                         {{ post.content }}
                                     </p>
                                     <div class="blog-tags">
-                                        <div class="tag">Tag content</div>
-                                        <div class="tag">Tag content</div>
-                                        <div class="tag">Tag content</div>
-                                        <div class="tag">Tag content</div>
-                                        <div class="tag">Tag content</div>
-                                        <div class="tag">Tag content</div>
-                                        <div class="tag">Tag content</div>
-                                        <div class="tag">Tag content</div>
-                                        <div class="tag">Tag content</div>
-                                        <div class="tag">Tag content</div>
-                                        <div class="tag">Tag content</div>
+                                        {% for tag in post.tag.all %}
+                                            <a href="{% url 'home:tag' tag.slug %}"><div class="tag">{{ tag.name }}</div></a>
+                                        {% endfor %}
                                     </div>
+
                                     <div class="social-share">
                                         <div class="reactions">
                                             <div class="likes">
