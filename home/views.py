@@ -1,20 +1,40 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import View
 from .models import Post, Tag, Comment
-from .forms import CommentForm
+from .forms import CommentForm, SubscribeForm
+from django.contrib import messages
 
 
 class HomeView(View):
     template_name = 'home/home.html'
+    form_class = SubscribeForm
+
+    def setup(self, request, *args, **kwargs):
+        posts = Post.objects.all()
+        self.new_posts = posts.order_by('-updated_at')[0:3]
+        self.top_posts = posts.order_by('-view_count')[0:3]
+        super().setup(request, *args, **kwargs)
 
     def get(self, request):
-        posts = Post.objects.all()
-        new_posts = posts.order_by('-updated_at')[0:3]
-        top_posts = posts.order_by('-view_count')[0:3]
+        form = self.form_class()
         context = {
-            'posts':posts,
-            'new_posts':new_posts,
-            'top_posts':top_posts
+            'new_posts':self.new_posts,
+            'top_posts':self.top_posts,
+            'form':form
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Subscribed Successfully')
+            return redirect('home:home')
+
+        context = {
+            'new_posts':self.new_posts,
+            'top_posts':self.top_posts,
+            'form':form
         }
         return render(request, self.template_name, context)
 

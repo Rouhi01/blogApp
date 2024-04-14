@@ -47,3 +47,8 @@ class Comment(models.Model):
     parent = models.ForeignKey('Comment', on_delete=models.DO_NOTHING, null=True, blank=True, related_name='replies')
     is_reply = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Subscribe(models.Model):
+    email = models.EmailField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)

@@ -20,19 +20,15 @@
                         Cicero's 1st-century BC text De Finibus Bonorum et Malorum.
                     </p>
                 </div>
+
                 <div class="newsletter">
                     <form method="POST">
-                        <input
-                                type="email"
-                                name="email"
-                                maxlength="100"
-                                placeholder="Enter your email"
-                                required=""
-                                id="id_email"
-                        />
-                        <button class="btn btn-primary">Subscribe</button>
+                        {% csrf_token %}
+                        {{ form.email }}
+                        <button class="btn btn-primary" type="submit">Subscribe</button>
                     </form>
                 </div>
+                {% include 'inc/messages.html' %}
             </center>
         </div>
     </main>

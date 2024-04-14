@@ -1,0 +1,13 @@
+<div class="success-message">
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">
+                    <h4 class="alert alert-{{ message.tags }} text-center" style="padding-top: 5px; margin-top: 5px;">
+                        {{ message }}
+                    </h4>
+                </li>
+            {% endfor %}
+         </ul>
+     {% endif %}
+</div>
