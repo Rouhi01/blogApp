@@ -67,7 +67,7 @@
         <div class="container">
             <h1 class="sec-title">Top blogs</h1>
             <div class="grid-3">
-                {% for post in posts %}
+                {% for post in top_posts %}
                     <a href="{% url 'home:post_detail' post.slug %}">
                         <div class="card">
                             <div class="post-img">
@@ -106,7 +106,7 @@
             <h1 class="sec-title">New blogs</h1>
             <div class="grid-3">
 
-                {% for post in posts %}
+                {% for post in new_posts %}
                     <a href="{% url 'home:post_detail' post.slug %}">
                         <div class="card">
                             <div class="post-img">

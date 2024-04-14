@@ -9,8 +9,12 @@ class HomeView(View):
 
     def get(self, request):
         posts = Post.objects.all()
+        new_posts = posts.order_by('-updated_at')[0:3]
+        top_posts = posts.order_by('-view_count')[0:3]
         context = {
-            'posts':posts
+            'posts':posts,
+            'new_posts':new_posts,
+            'top_posts':top_posts
         }
         return render(request, self.template_name, context)
 
