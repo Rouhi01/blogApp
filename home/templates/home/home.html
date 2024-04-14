@@ -32,33 +32,35 @@
             </center>
         </div>
     </main>
-    <section class="sp">
-        <div class="container">
-            <div class="grid-2">
-                <div class="post-img">
-                    <img src="{% static 'home/img/post.png' %}" alt=""/>
-                </div>
-                <div class="post-content">
-                    <div class="cetagory">
-                        <p>Category name</p>
+    {% if featured_post %}
+        <section class="sp">
+
+            <div class="container">
+                <a href="{% url 'home:post_detail' featured_post.slug %}">
+                    <div class="grid-2">
+
+                        <div class="post-img">
+                            <img src="{{ featured_post.image.url }}" alt=""/>
+                        </div>
+                        <div class="post-content">
+                            <div class="cetagory">
+                                <p>{{ featured_post.tag.all.0.name }}</p>
+                            </div>
+                            <h1>
+                                {{ featured_post.title|capfirst }}
+                            </h1>
+                            <p class="des">
+                                {{ featured_post.content|truncatechars:200 }}
+                            </p>
+                            <a class="learn" href="#"
+                            >Learn more <span class="material-icons"> trending_flat </span></a
+                            >
+                        </div>
                     </div>
-                    <h1>
-                        Lorem ipsum began as scrambled, nonsensical Latin derived from
-                        Cicero's 1st-century BC text.
-                    </h1>
-                    <p class="des">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure
-                        ullam animi repellat non ut delectus culpa! Iste quia corporis
-                        illum doloribus facilis quo totam eveniet sapiente odit
-                        cupiditate? Cumque, nam?
-                    </p>
-                    <a class="learn" href="#"
-                    >Learn more <span class="material-icons"> trending_flat </span></a
-                    >
-                </div>
+                </a>
             </div>
-        </div>
-    </section>
+        </section>
+    {% endif %}
     <section class="sp">
         <div class="container">
             <h1 class="sec-title">Top blogs</h1>

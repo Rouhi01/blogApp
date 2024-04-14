@@ -13,6 +13,9 @@ class HomeView(View):
         posts = Post.objects.all()
         self.new_posts = posts.order_by('-updated_at')[0:3]
         self.top_posts = posts.order_by('-view_count')[0:3]
+        featured_post = posts.filter(is_featured=True)
+        if featured_post:
+            self.featured_post = featured_post[0]
         super().setup(request, *args, **kwargs)
 
     def get(self, request):
@@ -20,7 +23,8 @@ class HomeView(View):
         context = {
             'new_posts':self.new_posts,
             'top_posts':self.top_posts,
-            'form':form
+            'featured_post':self.featured_post,
+            'form':form,
         }
         return render(request, self.template_name, context)
 
@@ -34,6 +38,7 @@ class HomeView(View):
         context = {
             'new_posts':self.new_posts,
             'top_posts':self.top_posts,
+            'featured_post': self.featured_post,
             'form':form
         }
         return render(request, self.template_name, context)
