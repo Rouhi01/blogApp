@@ -151,8 +151,20 @@ class SearchView(View):
         }
         return render(request, self.template_name, context)
 
+
 class AboutView(View):
     template_name = 'home/about.html'
-
     def get(self, request):
         return render(request, self.template_name)
+
+
+class AllPostView(View):
+    template_name = 'home/all_post.html'
+
+    def get(self, request):
+        posts = Post.objects.all()
+
+        context = {
+            'posts':posts
+        }
+        return render(request, self.template_name, context)

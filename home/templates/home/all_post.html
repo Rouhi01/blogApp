@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+{% block title %}
+    Blog | All post
+{% endblock %}
+{% block content %}
+    <main style="padding-top: 70px;">
+
+
+        <main>
+            <div class="container">
+                <div class="page-top">
+                    <div class="top flex">
+                        <div class="page-name">
+                            <a href="" class="learn">
+                                <span class="material-icons"> keyboard_return </span> Go back
+                            </a>
+                            <h1>All Posts</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <section class="sp">
+            <div class="container">
+                <div class="blog-tags">
+                    {% for post in posts %}
+                        <p class="tag">
+                            <a style="color: white;" href="{% url 'home:post_detail' post.slug %}">{{ post.title }}</a>
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

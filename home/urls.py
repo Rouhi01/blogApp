@@ -9,4 +9,5 @@ urlpatterns = [
     path('Author/<slug:slug>/', views.AuthorView.as_view(), name='author'),
     path('search/', views.SearchView.as_view(), name='search'),
     path('About/', views.AboutView.as_view(), name='about'),
+    path('all_post/', views.AllPostView.as_view(), name='all_post'),
 ]
