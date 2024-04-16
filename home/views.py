@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import View
-from .models import Post, Tag, Comment
+from .models import Post, Tag, Comment, Profile
 from .forms import CommentForm, SubscribeForm
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.db.models import Count
 
 
 class HomeView(View):
@@ -113,3 +115,23 @@ class TagView(View):
         }
         return render(request, self.template_name, context)
 
+
+class AuthorView(View):
+    template_name = 'home/author.html'
+
+    def setup(self, request, *args, **kwargs):
+        posts = Post.objects.all()
+        self.profile = Profile.objects.get(slug=kwargs['slug'])
+        self.new_posts = posts.filter(author=self.profile.user).order_by('-updated_at')[0:2]
+        self.top_posts = posts.filter(author=self.profile.user).order_by('-view_count')[0:2]
+        super().setup(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        top_authors = User.objects.annotate(number=Count('posts')).order_by('number')
+        context = {
+            'profile':self.profile,
+            'top_posts':self.top_posts,
+            'new_posts':self.new_posts,
+            'top_authors':top_authors
+        }
+        return render(request, self.template_name, context)

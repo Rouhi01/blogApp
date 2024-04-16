@@ -13,6 +13,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     view_count = models.IntegerField(null=True, blank=True)
     is_featured = models.BooleanField(default=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts', blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -53,3 +54,19 @@ class Comment(models.Model):
 class Subscribe(models.Model):
     email = models.EmailField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    bio = models.CharField(max_length=200)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.user.username)
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.user.first_name
+
+
