@@ -135,3 +135,18 @@ class AuthorView(View):
             'top_authors':top_authors
         }
         return render(request, self.template_name, context)
+
+
+class SearchView(View):
+    template_name = 'home/search.html'
+    def get(self, request):
+        search_query = ''
+        posts = None
+        if request.GET.get('q'):
+            search_query = request.GET.get('q')
+            posts = Post.objects.filter(title__icontains=search_query)
+        context = {
+            'posts':posts,
+            'search_query':search_query
+        }
+        return render(request, self.template_name, context)
