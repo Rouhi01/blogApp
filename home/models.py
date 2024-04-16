@@ -70,3 +70,8 @@ class Profile(models.Model):
         return self.user.first_name
 
 
+class WebsiteMeta(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=500)
+    about = models.TextField()
+

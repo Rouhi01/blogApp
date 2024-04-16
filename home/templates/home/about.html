@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+    Blog | About
+{% endblock %}
+{% block content %}
+    <main style="padding-top: 45px;">
+
+
+        <main>
+            <div class="container">
+                <div class="page-top">
+                    <div class="top flex">
+                        <div class="page-name">
+                            <a href="https://murmuring-tundra-27912.herokuapp.com/" class="learn">
+                                <span class="material-icons"> keyboard_return </span> Go back
+                            </a>
+                            <h1>About</h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+        <section class="sp">
+            <div class="container">
+                <p>{{ website_info.about }}</p>
+            </div>
+        </section>
+
+
+    </main>
+{% endblock %}

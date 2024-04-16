@@ -150,3 +150,9 @@ class SearchView(View):
             'search_query':search_query
         }
         return render(request, self.template_name, context)
+
+class AboutView(View):
+    template_name = 'home/about.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
