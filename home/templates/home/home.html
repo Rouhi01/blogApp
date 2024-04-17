@@ -31,11 +31,13 @@
                 </div>
 
                 <div class="newsletter">
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{ form.email }}
-                        <button class="btn btn-primary" type="submit">Subscribe</button>
-                    </form>
+                    {% if request.session.subscribed == None%}
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form.email }}
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </form>
+                    {% endif %} 
                 </div>
                 {% include 'inc/messages.html' %}
             </center>

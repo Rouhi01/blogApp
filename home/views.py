@@ -34,6 +34,7 @@ class HomeView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
+            request.session['subscribed'] = True
             messages.success(request, 'Subscribed Successfully')
             return redirect('home:home')
 
